@@ -100,16 +100,7 @@ public class DeviceAdminReceiver extends android.app.admin.DeviceAdminReceiver {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
-    @Override
-    public void onSecurityLogsAvailable(Context context, Intent intent) {
-        Log.i(TAG, "onSecurityLogsAvailable() called");
-        Toast.makeText(context,
-                context.getString(R.string.on_security_logs_available),
-                Toast.LENGTH_LONG)
-                .show();
-    }
-
+    // EXERCISE: handle security log availability, e.g. show a toast.
 
     /*
      * TODO: reconsider how to store and present the logs in the future, e.g. save the file into
@@ -126,7 +117,8 @@ public class DeviceAdminReceiver extends android.app.admin.DeviceAdminReceiver {
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         List<NetworkEvent> events = null;
         try {
-            events = dpm.retrieveNetworkLogs(getComponentName(context), batchToken);
+            // EXERCISE: retrieve a batch of network logs and store it to "events" for further
+            // processing.
         } catch (SecurityException e) {
             Log.e(TAG,
                 "Exception while retrieving network logs batch with batchToken: " + batchToken, e);

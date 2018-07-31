@@ -90,7 +90,7 @@ public class SecurityLogsFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         mAdapter.add(getString(R.string.security_logs_retrieved_message, new Date().toString()));
         try {
-            processEvents(mDevicePolicyManager.retrieveSecurityLogs(mAdminName));
+            // EXERCISE: get security logs and process then using method below.
         } catch (SecurityException e) {
             Log.e(TAG, "Exception thrown when trying to retrieve security logs", e);
             mAdapter.add(getString(R.string.exception_retrieving_security_logs));
