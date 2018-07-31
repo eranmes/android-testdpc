@@ -47,7 +47,8 @@ public class SignAndVerifyTask extends AsyncTask<String, Integer, String> {
         String alias = aliases[0];
         try {
             final String algorithmIdentifier = "SHA256withRSA";
-            PrivateKey privateKey = KeyChain.getPrivateKey(mContext, alias);
+            //TODO: IMPLEMENT ME: Get the private key.
+            PrivateKey privateKey = null;
 
             byte[] data = new String("hello").getBytes();
             Signature signer = Signature.getInstance(algorithmIdentifier);
@@ -55,7 +56,8 @@ public class SignAndVerifyTask extends AsyncTask<String, Integer, String> {
             signer.update(data);
             byte[] signature = signer.sign();
 
-            X509Certificate cert = KeyChain.getCertificateChain(mContext, alias)[0];
+            //TODO: IMPLEMENT ME: Get the self-signed certificate associated with the key.
+            X509Certificate cert = null;
             PublicKey publicKey = cert.getPublicKey();
             Signature verifier = Signature.getInstance(algorithmIdentifier);
             verifier.initVerify(publicKey);
@@ -63,10 +65,6 @@ public class SignAndVerifyTask extends AsyncTask<String, Integer, String> {
             if (verifier.verify(signature)) {
                 return cert.getSubjectX500Principal().getName();
             }
-        } catch (KeyChainException e) {
-            Log.e(TAG, "Error getting key", e);
-        } catch (InterruptedException e) {
-            Log.e(TAG, "Interrupted while getting the key", e);
         } catch (NoSuchAlgorithmException e) {
             Log.e(TAG, "Algorithm not supported", e);
         } catch (SignatureException e) {

@@ -79,48 +79,11 @@ public class GenerateKeyAndCertificateTask extends AsyncTask<Void, Integer, Atte
     @TargetApi(28)
     @Override
     protected AttestedKeyPair doInBackground(Void... voids) {
-        try {
-            KeyGenParameterSpec.Builder keySpecBuilder =
-                    new KeyGenParameterSpec.Builder(
-                                    mAlias,
-                                    KeyProperties.PURPOSE_SIGN | KeyProperties.PURPOSE_VERIFY)
-                            .setKeySize(2048)
-                            .setDigests(KeyProperties.DIGEST_SHA256)
-                            .setSignaturePaddings(
-                                    KeyProperties.SIGNATURE_PADDING_RSA_PSS,
-                                    KeyProperties.SIGNATURE_PADDING_RSA_PKCS1);
-
-            if (mAttestationChallenge != null) {
-                keySpecBuilder.setAttestationChallenge(mAttestationChallenge);
-            }
-
-            KeyGenParameterSpec keySpec = keySpecBuilder.build();
-            AttestedKeyPair keyPair =
-                    mDevicePolicyManager.generateKeyPair(
-                            mAdminComponentName, "RSA", keySpec, mIdAttestationFlags);
-
-            if (keyPair == null) {
-                return null;
-            }
-
-            X500Principal subject = new X500Principal("CN=TestDPC, O=Android, C=US");
-            // Self-signed certificate: Same subject and issuer.
-            X509Certificate selfSigned =
-                    CertificateUtils.createCertificate(keyPair.getKeyPair(), subject, subject);
-
-            List<Certificate> certs = new ArrayList<Certificate>();
-            certs.add(selfSigned);
-
-            if (!mDevicePolicyManager.setKeyPairCertificate(
-                    mAdminComponentName, mAlias, certs, mIsUserSelectable)) {
-                return null;
-            }
-
-            return keyPair;
-        } catch (CertificateException | OperatorCreationException | IOException e) {
-            Log.e(TAG, "Failed to create certificate", e);
-        }
-
+        //TODO: IMPLEMENT ME:
+        // Generate a key-pair
+        // Generate a self-signed certificate associated with it
+        // Install it into KeyChain.
+        // See the utils.CertificateUtils class.
         return null;
     }
 
@@ -153,7 +116,8 @@ public class GenerateKeyAndCertificateTask extends AsyncTask<Void, Integer, Atte
         View keyGenResultView =
                 mActivity.getLayoutInflater().inflate(R.layout.key_generation_result, null);
 
-        List<Certificate> attestationChain = keyPair.getAttestationRecord();
+        //TODO: IMPLEMENT ME
+        List<Certificate> attestationChain = null;
         TextView attestationDetailsView = keyGenResultView.findViewById(R.id.attestation_details);
 
         if ((attestationChain != null) && (attestationChain.size() > 0)) {
