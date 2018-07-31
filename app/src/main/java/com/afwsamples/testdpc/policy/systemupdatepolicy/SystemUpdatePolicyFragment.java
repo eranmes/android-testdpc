@@ -266,16 +266,16 @@ public class SystemUpdatePolicyFragment extends Fragment implements View.OnClick
     @TargetApi(28)
     private boolean setSystemUpdatePolicy() {
         SystemUpdatePolicy newPolicy;
+        // TODO: initialize newPolicy for each case using static .create* calls.
         switch (mSystemUpdatePolicySelection.getCheckedRadioButtonId()) {
             case R.id.system_update_policy_automatic:
-                newPolicy = SystemUpdatePolicy.createAutomaticInstallPolicy();
+                // TODO initialize newPolicy
                 break;
             case R.id.system_update_policy_Windowed:
-                newPolicy = SystemUpdatePolicy.createWindowedInstallPolicy(
-                        mMaintenanceStart, mMaintenanceEnd);
+                // TODO initialize newPolicy
                 break;
             case R.id.system_update_policy_postpone:
-                newPolicy = SystemUpdatePolicy.createPostponeInstallPolicy();
+                // TODO initialize newPolicy
                 break;
             case R.id.system_update_policy_none:
             default:
@@ -285,14 +285,12 @@ public class SystemUpdatePolicyFragment extends Fragment implements View.OnClick
         try {
             if (BuildCompat.isAtLeastP() && newPolicy != null && mFreezePeriods.size() != 0) {
                 final List<FreezePeriod> periods = new ArrayList<>(mFreezePeriods.size());
-                for (Period p : mFreezePeriods) {
-                    periods.add(p.toFreezePeriod());
-                }
-                newPolicy.setFreezePeriods(periods);
+                // TODO: add all freeze periods to the system update policy. Use .setFreezePeriods()
             }
-            mDpm.setSystemUpdatePolicy(DeviceAdminReceiver.getComponentName(getActivity()),
-                    newPolicy);
-            Toast.makeText(getContext(), "Policy set successfully", Toast.LENGTH_LONG).show();
+            // TODO: set the new SystemUpdatePolicy in the DevicePolicyManager, then uncomment
+            // the code showing the toast below.
+            // TODO: uncomment when setting the policy is implemented.
+            // Toast.makeText(getContext(), "Policy set successfully", Toast.LENGTH_LONG).show();
             return true;
         } catch (IllegalArgumentException e) {
             Toast.makeText(getContext(), "Failed to set system update policy: " + e.getMessage(),

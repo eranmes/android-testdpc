@@ -223,30 +223,30 @@ public final class PasswordConstraintsFragment extends ProfileOrParentFragment i
                 // Store newValue now so getEntry() can return the new setting
                 list.setValue((String) newValue);
                 summary = list.getEntry();
-                getDpm().setPasswordQuality(getAdmin(), value);
+                // TODO: set the password quality to be a numeric-only password.
                 refreshPreferences();
                 break;
             }
             case Keys.MIN_LENGTH:
-                getDpm().setPasswordMinimumLength(getAdmin(), value);
+                // TODO: set the minimum length value required of the password
                 break;
             case Keys.MIN_LETTERS:
-                getDpm().setPasswordMinimumLetters(getAdmin(), value);
+                // TODO: set the password count for minimum letters
                 break;
             case Keys.MIN_NUMERIC:
-                getDpm().setPasswordMinimumNumeric(getAdmin(), value);
+                // TODO: set the password count for minimum numbers
                 break;
             case Keys.MIN_LOWERCASE:
-                getDpm().setPasswordMinimumLowerCase(getAdmin(), value);
+                // TODO: set the password count for minimum number of lowercase letters
                 break;
             case Keys.MIN_UPPERCASE:
-                getDpm().setPasswordMinimumUpperCase(getAdmin(), value);
+                // TODO: set the password count for minimum number of uppercase letters
                 break;
             case Keys.MIN_SYMBOLS:
-                getDpm().setPasswordMinimumSymbols(getAdmin(), value);
+                // TODO: set the password count for minimum number of symbols
                 break;
             case Keys.MIN_NONLETTER:
-                getDpm().setPasswordMinimumNonLetter(getAdmin(), value);
+                // TODO: set the password count for minimum number of non-letter characters
                 break;
             default:
                 return false;
